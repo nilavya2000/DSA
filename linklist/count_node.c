@@ -1,17 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "base.h"
 
-struct Node{
-   int data;
-   struct Node *next;
-};
-
-void push(struct Node** h_ref, int new_data){
-   struct Node* new_node = (struct Node * )malloc(sizeof(struct Node ));
-   new_node->data = new_data;
-   new_node->next = (*h_ref);
-   (*h_ref) = new_node;
-}
 
 int count(struct Node * head){
    int cn=0;
@@ -23,14 +13,13 @@ int count(struct Node * head){
    return cn;
 
 }
-void p(struct Node *head){
-   while(head != NULL){
-      printf(" %d ",head->data);
-      head = head->next;
-   }
-   printf("\n");
-}
 
+
+int g_count(struct Node * head){
+   if(head == NULL)
+      return 0;
+   return 1+ g_count(head->next);
+}
 
 int main(){
    struct Node *head = NULL;
@@ -40,6 +29,7 @@ int main(){
    push(&head, 3);
    push(&head, 2);
    p(head);
-   printf("Total no of nodes : - %d \n", count(head));
+   printf("Total no of nodes (iterative): - %d \n", count(head));
+   printf("Total no of nodes (recursive) : - %d \n", g_count(head));
    return 0;
 }
