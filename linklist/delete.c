@@ -1,16 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct Node{
-   int data;
-   struct Node *next;
-};
+#include "base.h"
 
-void push(struct Node** h_ref, int new_data){
-   struct Node* new_node = (struct Node * )malloc(sizeof(struct Node ));
-   new_node->data = new_data;
-   new_node->next = (*h_ref);
-   (*h_ref) = new_node;
-}
+
 
 void delete(struct Node ** h_ref, int key){
    struct Node * temp = *h_ref, *prev;
@@ -30,13 +22,7 @@ void delete(struct Node ** h_ref, int key){
 
 }
 
-void p(struct Node *head){
-   while(head != NULL){
-      printf(" %d ",head->data);
-      head = head->next;
-   }
-   printf("\n");
-}
+
 
 int main(){
    struct Node *head = NULL;
@@ -47,6 +33,7 @@ int main(){
    push(&head, 2);
    p(head);
    delete(&head, 4);
+   printf("After deleting one element: \n ");
    p(head);
    return 0;
 }
